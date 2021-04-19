@@ -13,7 +13,7 @@ GameObject:
   m_Layer: 0
   m_Name: Ball Spawner
   m_TagString: Untagged
-  m_Icon: {fileID: 0}
+  m_Icon: {fileID: -964228994112308473, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -47,4 +47,4 @@ MonoBehaviour:
     type: 3}
   _ballLifetime: 10
   _spawnDelay: 1
-  _initialVelocity: {x: 0, y: 0}
+  _initialVelocity: {x: 40, y: 10}

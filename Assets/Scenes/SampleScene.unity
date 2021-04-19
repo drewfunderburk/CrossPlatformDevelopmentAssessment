@@ -266,7 +266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4eb455adbdcd18041b154aa5c777081a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scoreText: {fileID: 0}
+  _scoreText: {fileID: 1219099362}
 --- !u!114 &797402286
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -752,6 +752,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 7338422717129178706, guid: 3e8550d5a54227646a02b5e37933171e,
+        type: 3}
+      propertyPath: _victoryScreen
+      value: 
+      objectReference: {fileID: 797402285}
     - target: {fileID: 7338422717129178707, guid: 3e8550d5a54227646a02b5e37933171e,
         type: 3}
       propertyPath: m_LocalPosition.x

@@ -9,6 +9,7 @@ public class VictoryScreenBehaviour : MonoBehaviour
 
     public void UpdateScore(float score)
     {
+        // Update the score text
         _scoreText.text = score.ToString();
     }
 }

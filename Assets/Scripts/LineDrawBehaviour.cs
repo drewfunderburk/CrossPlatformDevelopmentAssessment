@@ -97,6 +97,9 @@ public class LineDrawBehaviour : MonoBehaviour
             // Simplify the line renderer to reduce the number of points based on the given distance
             _lineRenderer.Simplify(_distanceBetweenPoints);
 
+            // Add line renderer to the list for score calculation
+            GameManagerBehaviour.Lines.Add(_lineRenderer);
+
             // Add an EdgeCollider2D to _start and initialize it
             _edgeCollider = _start.AddComponent<EdgeCollider2D>();
             _edgeCollider.offset = -_start.transform.position;
