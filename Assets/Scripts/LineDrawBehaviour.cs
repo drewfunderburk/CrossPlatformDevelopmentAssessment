@@ -7,7 +7,10 @@ public class LineDrawBehaviour : MonoBehaviour
     [SerializeField] private Material _material;
     [SerializeField] private Color _colorWhileDrawing;
     [SerializeField] private Color _colorWhenFinished;
+    [Space]
     [SerializeField] private float _lineWidth = 0.1f;
+
+    [Tooltip("Distance to use when simplifying the line. A lower value will result in a more detailed line.")]
     [SerializeField] private float _distanceBetweenPoints = 0.1f;
 
     private LineRenderer _lineRenderer;
@@ -58,6 +61,7 @@ public class LineDrawBehaviour : MonoBehaviour
             // Make _start a new game object and move it to mousePosition
             _start = new GameObject();
             _start.transform.position = mousePosition;
+            _start.tag = "Line";
 
             // Add a LineRenderer to _start and initialize it
             _lineRenderer = _start.AddComponent<LineRenderer>();
