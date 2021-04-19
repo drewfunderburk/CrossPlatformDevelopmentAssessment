@@ -34,7 +34,7 @@ public class BallSpawnerBehaviour : MonoBehaviour
             // Move it to our current position
             ball.transform.position = transform.position;
 
-            // Add the initial velocity
+            // Set the initial velocity
             ball.GetComponent<Rigidbody2D>().velocity = _initialVelocity;
 
             // Destroy the ball after it's lifetime is expired
