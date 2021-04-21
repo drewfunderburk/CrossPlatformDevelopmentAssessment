@@ -13,15 +13,15 @@ public class BallBehaviour : MonoBehaviour
         _gravityScale = _rigidbody.gravityScale;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Line") && _rigidbody.velocity.y > 0)
-            _rigidbody.gravityScale = 0;
-    }
+    //private void OnCollisionEnter2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Line") && _rigidbody.velocity.y > 0)
+    //        _rigidbody.gravityScale = 0;
+    //}
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Line"))
-            _rigidbody.gravityScale = _gravityScale;
-    }
+    //private void OnCollisionExit2D(Collision2D collision)
+    //{
+    //    if (collision.gameObject.CompareTag("Line"))
+    //        _rigidbody.gravityScale = _gravityScale;
+    //}
 }
