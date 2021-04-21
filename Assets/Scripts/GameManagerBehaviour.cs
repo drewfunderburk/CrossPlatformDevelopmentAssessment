@@ -1,31 +1,47 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManagerBehaviour : MonoBehaviour
 {
+    public static GameManagerBehaviour Instance;
     public static List<LineRenderer> Lines = new List<LineRenderer>();
     [SerializeField] private VictoryScreenBehaviour _victoryScreen;
     [SerializeField] private float _baseScore = 1000;
 
-    public static UnityEvent OnGameOver;
+    private bool _isGameOver = false;
 
-    private static bool _isGameOver = false;
-
-    public static bool IsGameOver { get; }
-
-    private void Update()
-    {
-        if (_isGameOver)
+    public bool IsGameOver 
+    { 
+        get { return _isGameOver; }
+        set
+        {
+            _isGameOver = value;
+            if (_isGameOver)
+                DoGameOver();
+        }
     }
-    public static void DoGameOver()
-    {
-        _isGameOver = true;
 
-        _victory
-        OnGameOver.Invoke();
+    private void Start()
+    {
+        // Singleton
+
+        // If there is no Instance, make this the new Instance
+        if (!Instance)
+            Instance = this;
+        // If there is an Instance and it is not this object, delete this object
+        else if (Instance != this)
+            Destroy(this.gameObject);
+    }
+
+    public void DoGameOver()
+    {
+        // Stop time to prevent movements
+        Time.timeScale = 0.001f;
+
+        // Turn on Victory Screen
+        _victoryScreen.gameObject.SetActive(true);
     }
 
     public int CalculateScore()
@@ -48,5 +64,16 @@ public class GameManagerBehaviour : MonoBehaviour
 
         // Score should decrease with longer lines, so we will subtract totalDistance from baseScore to come up with our final score
         return (int)(_baseScore - totalDistance);
+    }
+
+    public void RestartScene(float delay = 0)
+    {
+        StartCoroutine(RestartSceneCoroutine(delay));
+    }
+
+    private IEnumerator RestartSceneCoroutine(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }
