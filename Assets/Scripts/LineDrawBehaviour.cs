@@ -44,6 +44,9 @@ public class LineDrawBehaviour : MonoBehaviour
             Collider2D[] colliders = Physics2D.OverlapAreaAll(_startMousePosition, mousePosition);
             foreach (Collider2D collider in colliders)
             {
+                if (!collider.gameObject.CompareTag("Line"))
+                    continue;
+
                 // Remove these line renderers from the master list
                 GameManagerBehaviour.Lines.Remove(collider.gameObject.GetComponent<LineRenderer>());
 
