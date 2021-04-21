@@ -10,7 +10,7 @@ public class GoalBehaviour : MonoBehaviour
         {
             // Destroy the ball
             Destroy(collision.gameObject);
-            GameManagerBehaviour.DoGameOver();
+            GameManagerBehaviour.Instance.IsGameOver = true;
         }
     }
 }
