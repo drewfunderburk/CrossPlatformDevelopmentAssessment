@@ -8,6 +8,7 @@ public class GameManagerBehaviour : MonoBehaviour
     public static GameManagerBehaviour Instance;
     public static List<LineRenderer> Lines = new List<LineRenderer>();
     [SerializeField] private VictoryScreenBehaviour _victoryScreen;
+    [SerializeField] private LineDrawBehaviour _lineDraw;
     [SerializeField] private float _baseScore = 1000;
 
     private bool _isGameOver = false;
@@ -33,24 +34,33 @@ public class GameManagerBehaviour : MonoBehaviour
         // If there is an Instance and it is not this object, delete this object
         else if (Instance != this)
             Destroy(this.gameObject);
+
+        // Ensure Victory Screen is disabled
+        if (_victoryScreen.gameObject.activeInHierarchy)
+            _victoryScreen.gameObject.SetActive(false);
     }
 
     public void DoGameOver()
     {
-        // Stop time to prevent movements
-        Time.timeScale = 0.001f;
-
         // Turn on Victory Screen
         _victoryScreen.gameObject.SetActive(true);
+        _victoryScreen.UpdateScore(CalculateScore());
+
+        // Disable line drawing
+        _lineDraw.enabled = false;
     }
 
-    public int CalculateScore()
+    public float CalculateScore()
     {
         float totalDistance = 0;
 
         // Loop through each line renderer
         foreach (LineRenderer line in Lines)
         {
+            // If the line is null, go to the next loop
+            if (!line)
+                continue;
+
             // Loop through each point in the renderer
             for (int i = 1; i < line.positionCount; i++)
             {
@@ -63,7 +73,7 @@ public class GameManagerBehaviour : MonoBehaviour
         }
 
         // Score should decrease with longer lines, so we will subtract totalDistance from baseScore to come up with our final score
-        return (int)(_baseScore - totalDistance);
+        return Mathf.Max(0, _baseScore - (totalDistance * 10));
     }
 
     public void RestartScene(float delay = 0)
@@ -73,7 +83,19 @@ public class GameManagerBehaviour : MonoBehaviour
 
     private IEnumerator RestartSceneCoroutine(float delay)
     {
+        // Wait however long is specified
         yield return new WaitForSeconds(delay);
+
+        // Reload the active scene
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+
+    public void QuitGame()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+         Application.Quit();
+#endif
     }
 }
