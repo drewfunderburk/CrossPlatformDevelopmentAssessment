@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class WallSpawnerBehaviour : MonoBehaviour
 {
+    [Tooltip("Reference to the wall prefab")]
     [SerializeField] private GameObject _wallPrefab;
     [SerializeField] private float _numberOfWallsToSpawn = 5;
     [SerializeField] private float _verticalPadding = 2;

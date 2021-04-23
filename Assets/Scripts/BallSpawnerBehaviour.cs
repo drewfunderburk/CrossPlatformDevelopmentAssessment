@@ -4,12 +4,17 @@ using UnityEngine;
 
 public class BallSpawnerBehaviour : MonoBehaviour
 {
+    [Tooltip("The prefab to be used as the ball")]
     [SerializeField] private GameObject _ballPrefab;
     [Space]
+    [Tooltip("How long the balls should stay alive in seconds before being destroyed")]
     [SerializeField] private float _ballLifetime = 10;
+    [Tooltip("The delay in seconds between ball spawns")]
     [SerializeField] private float _spawnDelay = 1;
+    [Tooltip("Initial Velocity to give every ball on spawn")]
     [SerializeField] private Vector2 _initialVelocity = new Vector2();
 
+    // Timer used for _spawnDelay
     private float _spawnTimer;
 
     private void Start()

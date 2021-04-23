@@ -4,20 +4,29 @@ using UnityEngine;
 
 public class LineDrawBehaviour : MonoBehaviour
 {
+    [Tooltip("Material used to render the LineRenderer")]
     [SerializeField] private Material _material;
+    [Tooltip("Color to use while drawing the line")]
     [SerializeField] private Color _colorWhileDrawing;
+    [Tooltip("The color to use when drawing is complete")]
     [SerializeField] private Color _colorWhenFinished;
     [Space]
+    [Tooltip("The thickness of the drawn line")]
     [SerializeField] private float _lineWidth = 0.1f;
 
     [Tooltip("Distance to use when simplifying the line. A lower value will result in a more detailed line.")]
     [SerializeField] private float _distanceBetweenPoints = 0.1f;
 
+    // The LineRenderer being used to draw the current line
     private LineRenderer _lineRenderer;
+    // The EdgeCollider being used to handle the current line's collision
     private EdgeCollider2D _edgeCollider;
 
+    // The GameObject used to hold the LineRenderer and EdgeCollider
     private GameObject _start;
+    // The position of the mouse last frame
     private Vector2 _lastMousePosition = new Vector2();
+    // The position of the mouse when the line was started
     private Vector2 _startMousePosition = new Vector2();
 
     private void Update()

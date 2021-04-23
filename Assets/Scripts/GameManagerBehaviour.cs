@@ -5,12 +5,18 @@ using UnityEngine.SceneManagement;
 
 public class GameManagerBehaviour : MonoBehaviour
 {
+    // Singleton instance of this class for use in other scripts
     public static GameManagerBehaviour Instance;
+    // List of Lines drawn to the screen. Would be made nonstatic on code cleanup
     public static List<LineRenderer> Lines = new List<LineRenderer>();
+    [Tooltip("Reference to the victory screen")]
     [SerializeField] private VictoryScreenBehaviour _victoryScreen;
+    [Tooltip("Reference to the player's LineDrawBehaviour")]
     [SerializeField] private LineDrawBehaviour _lineDraw;
+    [Tooltip("The base score to be subtracted from based on line length")]
     [SerializeField] private float _baseScore = 1000;
 
+    // Whether or not the game is over
     private bool _isGameOver = false;
 
     public bool IsGameOver 
@@ -92,8 +98,10 @@ public class GameManagerBehaviour : MonoBehaviour
 
     public void QuitGame()
     {
+        // If we are in the UnityEditor, stop playing
 #if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
+        // If in a build app, quit
 #else
          Application.Quit();
 #endif

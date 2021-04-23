@@ -5,6 +5,7 @@ using TMPro;
 
 public class VictoryScreenBehaviour : MonoBehaviour
 {
+    [Tooltip("Reference to the score text")]
     [SerializeField] private TextMeshProUGUI _scoreText;
 
     public void UpdateScore(float score)
